@@ -143,3 +143,12 @@ nav ul {
     font-size: 0.95rem;
     color: var(--texto-secundario);
 }
+
+.empresas-scroll {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-lg);
+    margin-top: var(--espaco-lg);
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+}
