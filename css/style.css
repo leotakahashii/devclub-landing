@@ -66,5 +66,50 @@ nav ul {
     color:var(--texto-secundario);
 }
 
+.trilhas-linha {
+    display: flex;
+    gap: var(--espaco-lg);
+}
 
+.trilha-no {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--verde-acao);
+}
 
+.trilha {
+    position: relative;
+}
+
+.trilha-card {
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;  /*posiciona o card colado acima do nó, empurrando para fora da linha */
+    left: 50%;     /*centraliza o card horizontalmente: left:50% leva a borda esquerda até o
+                    centro do elemento pai, e translateX(-50%) puxa o card de volta em metade
+                    da PRÓPRIA largura dele, resultando em centralização perfeita */
+    transform: translateX(-50%);
+    background-color: var(--bg-superficie);
+    padding: 20px;
+    border-radius: var(--radius-card);
+    min-width: 300px;
+}
+/* a centralização acima quebra nas pontas: o card do primeiro/último nó
+   estoura a tela porque tenta se espalhar igualmente pros dois lados.
+   Aqui a gente troca a centralização por alinhamento à borda do nó nas
+   extremidades, mantendo o card sempre dentro da viewport. */
+.trilha:first-child .trilha-card {
+    left: 0;
+    transform: translateX(0);
+}
+
+.trilha:last-child .trilha-card {
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+}
+
+.trilha:hover .trilha-card {
+    opacity: 1;
+}
