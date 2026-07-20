@@ -113,3 +113,33 @@ nav ul {
 .trilha:hover .trilha-card {
     opacity: 1;
 }
+
+#prova-social {
+    padding: var(--espaco-lg);
+    text-align: center;
+}
+
+.numeros {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-lg);
+}
+
+.numero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.numero span {
+    font-family: var(--fonte-destaque);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--verde-acao);
+}
+
+.numero p {
+    font-family: var(--fonte-base);
+    font-size: 0.95rem;
+    color: var(--texto-secundario);
+}
