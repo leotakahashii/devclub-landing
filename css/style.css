@@ -48,3 +48,23 @@ nav ul {
     font-weight: 500;
 }
 
+#quem-somos {
+    padding: var(--espaco-xl);
+    text-align: center;
+}
+
+#quem-somos h2 {
+    font-family: var(--fonte-destaque);
+    font-size: 2rem;
+}
+
+#quem-somos p {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    font-family: var(--fonte-base);
+    color:var(--texto-secundario);
+}
+
+
+
