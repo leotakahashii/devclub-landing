@@ -1,0 +1,17 @@
+body {
+    font-family: var(--font-base);
+    background-color: var(--bg-primario);
+    color: var(--texto-primario)
+}
+
+header {
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    gap: var(--espaco-md);
+}
+

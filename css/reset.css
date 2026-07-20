@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Remover os pontos/números das listas */
+ul, ol {
+    list-style: none;
+}
+
+/* Remover o sublinhado e herdar a cor do texto pai */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Para garantir que as imagens sejam responsivas e sem bordas antigas */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}

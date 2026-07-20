@@ -1,0 +1,29 @@
+:root {
+     /* Cores */
+    --bg-primario: #121212;
+    --bg-superficie: #1c1c1c;
+    --bg-superficie-hover: #262626;
+
+    --verde-acao: #39D353;
+    --verde-acao-hover: #2bc04a;
+
+    --texto-primario: #f5f5f5;
+    --texto-secundario: #a1a1aa;
+
+    --borda: #27272a;
+
+    /* Tipografia */
+    --fonte-base: 'Inter', sans-serif;
+    --fonte-destaque: 'Space Grotesk', sans-serif;
+
+    /* Bordas */
+    --radius-card: 14px;
+    --radius-botao: 10px;
+
+    /* Espaçamento */
+    --espaco-xs: 8px;
+    --espaco-sm: 16px;
+    --espaco-md: 24px;
+    --espaco-lg: 48px;
+    --espaco-xl: 80px;
+}
