@@ -640,6 +640,73 @@ nav ul {
     font-weight: 600;
 }
 
+#faq {
+    padding: var(--espaco-xl) var(--espaco-lg);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-lista {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-sm);
+}
+
+.faq-item {
+    background-color: var(--bg-superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-card);
+    overflow: hidden; /* essencial: esconde o conteúdo da resposta durante a animação de altura */
+}
+
+.faq-pergunta {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--espaco-md);
+    background: none;
+    border: none;
+    color: var(--texto-primario);
+    font-family: var(--fonte-base);
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.faq-icone {
+    font-size: 1.4rem;
+    color: var(--verde-acao);
+    transition: transform 0.3s ease; /* gira o "+" suavemente ao abrir */
+    flex-shrink: 0;
+    margin-left: var(--espaco-sm);
+}
+
+.faq-item.aberto .faq-icone {
+    transform: rotate(45deg); /* "+" vira "x" visualmente ao girar 45 graus */
+}
+
+.faq-resposta {
+    max-height: 0; /* escondido por padrão */
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 var(--espaco-md);
+}
+
+.faq-item.aberto .faq-resposta {
+    max-height: 200px; /* alto o suficiente pra caber qualquer resposta — ajustável se algum texto for maior */
+    padding: 0 var(--espaco-md) var(--espaco-md);
+}
+
+.faq-resposta p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
 #cta-final {
     padding: var(--espaco-xl) var(--espaco-md);
     text-align: center;
