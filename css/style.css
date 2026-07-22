@@ -9,9 +9,31 @@ h2 {
 }
 
 header {
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: var(--espaco-sm) var(--espaco-lg); /* vertical menor (faixa fina), horizontal maior (respiro das bordas) */
+    background-color: rgba(18, 18, 18, 0.8); /* mesmo tom do --bg-primario, mas com transparência pra ainda deixar ver um pouco as partículas */
+    backdrop-filter: blur(8px); /* desfoca o que está atrás do header, reforça a separação visual sem precisar de fundo 100% sólido */
+    border-bottom: 1px solid var(--borda); /* linha sutil delimitando onde o header termina */
+    position: relative; /* garante que o header fique acima das partículas do canvas */
+    z-index: 10;
+}
+
+.logo {
+    font-family: var(--fonte-destaque); /* mesma fonte usada no h1 do hero, reforça identidade de marca */
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--texto-primario);
+}
+
+.btn-header {
+    background-color: var(--verde-acao); /* mesmo padrão do botão do hero (#hero a), consistência entre CTAs */
+    color: var(--bg-primario);
+    padding: 10px 20px; /* um pouco menor que o botão do hero, já que aqui é secundário/compacto */
+    border-radius: var(--radius-botao);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 nav ul {
@@ -83,6 +105,7 @@ nav ul {
 
 #formacoes {
     padding: var(--espaco-xl) var(--espaco-lg);
+    padding-bottom: 220px;
     text-align: center;
 }
 
@@ -94,7 +117,6 @@ nav ul {
     z-index: 1;
     isolation: isolate;
     margin-top: var(--espaco-xl);
-    transition: padding-bottom 0.4s ease;
 }
 
 .trilhas-linha::before {
@@ -262,6 +284,29 @@ nav ul {
     width: max-content; /* a track cresce conforme o conteúdo, sem quebrar linha */
     color: var(--texto-secundario);
     font-size: 0.9rem;
+}
+
+.empresa-pill {
+    display: inline-flex;        
+    align-items: center;
+    gap: var(--espaco-xs);             
+    
+    padding: 8px 16px;    
+    border-radius: 60px;
+    
+    background-color: rgba(57, 211, 83, 0.1);
+    border: 1px solid rgba(57, 211, 83, 0.3);
+}
+
+.empresa-icone {
+    width: 18px;   
+    height: 18px;
+    color: var(--verde-acao);
+}
+
+.empresa-icone svg {
+    width: 100%;
+    height: 100%;
 }
 
 #tutores {
