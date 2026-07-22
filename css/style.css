@@ -112,6 +112,32 @@ nav ul {
     font-weight: 500;
 }
 
+.scroll-indicador {
+    position: absolute;
+    bottom: var(--espaco-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.scroll-mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--texto-secundario);
+    border-radius: 14px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+}
+
+.scroll-roda {
+    width: 4px;
+    height: 8px;
+    background-color: var(--verde-acao);
+    border-radius: 2px;
+    animation: scroll-bounce 1.5s ease-in-out infinite; /* a "rodinha" desce e desaparece, sugerindo scroll */
+}
+
 #quem-somos {
     padding: var(--espaco-xl);
 }
@@ -177,6 +203,12 @@ nav ul {
     padding: var(--espaco-xl) var(--espaco-lg);
     max-width: 1100px;
     margin: 0 auto;
+}
+
+#diferenciais h2 {
+    text-align: center;
+    font-family: var(--fonte-destaque);
+    font-size: 2rem;
 }
 
 .diferencial-linha {
@@ -542,12 +574,6 @@ nav ul {
     display: flex;
     justify-content: center;
     gap: var(--espaco-lg);
-}
-
-.tutor-lista {
-    display: flex;
-    justify-content: center;
-    gap: var(--espaco-lg);
     flex-wrap: wrap; /* evita que os cards espremam demais em telas menores */
 }
 
@@ -593,17 +619,6 @@ nav ul {
     font-size: 0.8rem;
     color: var(--texto-secundario);
     line-height: 1.4;
-}
-
-.tutor-identidade span {
-    font-family: var(--fonte-base);
-    font-weight: 600;
-    color: var(--texto-primario);
-}
-
-.tutor-identidade p {
-    font-size: 0.85rem;
-    color: var(--texto-secundario);
 }
 
 #depoimentos {
@@ -774,22 +789,17 @@ section:not(#hero)::before {
     background: linear-gradient(90deg, transparent, var(--borda), transparent);
 }
 
-/* ===== RESPONSIVIDADE MOBILE ===== */
 
+/* Carrossel de trilhas: 2 cards visíveis em telas médias (tablets) */
 @media (max-width: 1024px) {
     .trilha-slide {
-        width: calc((100% - var(--espaco-md)) / 2); /* 2 cards visíveis */
-    }
-}
-
-@media (max-width: 768px) {
-    .trilha-slide {
-        width: 85%; /* quase 1 card por vez, com uma "espiadinha" do próximo pra indicar que é scrollável */
+        width: calc((100% - var(--espaco-md)) / 2);
     }
 }
 
 @media (max-width: 768px) {
 
+    /* ---------- HEADER ---------- */
     header {
         flex-direction: column;
         gap: var(--espaco-sm);
@@ -801,6 +811,7 @@ section:not(#hero)::before {
         justify-content: center;
     }
 
+    /* ---------- HERO ---------- */
     #hero h1 {
         font-size: 2.2rem;
     }
@@ -810,9 +821,20 @@ section:not(#hero)::before {
         padding: 0 var(--espaco-md);
     }
 
-    @media (max-width: 768px) {
+    /* logo grande (320px) precisa encolher bastante em telas pequenas,
+       senão ocupa a tela quase inteira e empurra o texto pra fora da viewport */
+    .hero-logo {
+        width: 160px;
+        height: 160px;
+    }
+
+    .hero-logo-wrapper {
+        top: 32%;
+    }
+
+    /* ---------- QUEM SOMOS ---------- */
     .quem-somos-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* empilha texto e números, era 2 colunas */
         text-align: center;
     }
 
@@ -820,15 +842,63 @@ section:not(#hero)::before {
     .quem-somos-texto p {
         text-align: center;
     }
-}
 
+    .quem-somos-numeros {
+        grid-template-columns: 1fr 1fr; /* mantém 2x2, já cabe bem mesmo em telas pequenas */
+    }
 
+    /* ---------- DIFERENCIAIS ---------- */
+    .diferencial-linha,
+    .diferencial-linha.reverso {
+        flex-direction: column; /* empilha texto e mockup, cancela o zigue-zague lateral */
+        text-align: center;
+        gap: var(--espaco-lg);
+    }
 
+    .diferencial-texto {
+        text-align: center;
+    }
+
+    .diferencial-texto p {
+        max-width: none;
+    }
+
+    .diferencial-icone {
+        margin-left: auto;
+        margin-right: auto; /* centraliza o ícone, já que o texto também está centralizado agora */
+    }
+
+    /* ---------- FORMAÇÕES (carrossel) ---------- */
+    #formacoes {
+        padding-bottom: 140px; /* reduz o espaço reservado embaixo, os cards ficam mais compactos em mobile */
+    }
+
+    .trilha-slide {
+        width: 85%; /* quase 1 card por vez, com uma "espiadinha" do próximo pra indicar que é scrollável */
+    }
+
+    /* ---------- TUTORES ---------- */
+    .tutor-card {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    /* ---------- FAQ ---------- */
+    #faq {
+        padding: var(--espaco-lg) var(--espaco-md);
+    }
+
+    .faq-pergunta {
+        font-size: 0.9rem;
+    }
+
+    /* ---------- DEPOIMENTOS ---------- */
     .depoimentos-lista {
         flex-direction: column;
         align-items: center;
     }
 
+    /* ---------- CTA FINAL ---------- */
     .cta-form {
         flex-direction: column;
         align-items: stretch;
@@ -837,12 +907,12 @@ section:not(#hero)::before {
 }
 
 .reveal {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
-    .reveal.ativo {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.reveal.ativo {
+    opacity: 1;
+    transform: translateY(0);
+}

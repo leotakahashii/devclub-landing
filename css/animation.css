@@ -10,3 +10,14 @@
 .empresas-track {
     animation: scroll-empresas 20s linear infinite;
 }
+
+@keyframes scroll-bounce {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+}
