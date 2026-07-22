@@ -153,3 +153,44 @@ nav ul {
     font-size: 0.9rem;
 }
 
+#tutores {
+    padding: var(--espaco-lg);
+    text-align: center;
+}
+
+.tutor-lista {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-lg);
+}
+
+.tutor-identidade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--espaco-xs);
+}
+
+.tutor-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: var(--verde-acao);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fonte-destaque);
+    font-weight: 700;
+    color: var(--bg-primario);
+}
+
+.tutor-identidade span {
+    font-family: var(--fonte-base);
+    font-weight: 600;
+    color: var(--texto-primario);
+}
+
+.tutor-identidade p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+}
