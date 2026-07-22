@@ -1,5 +1,5 @@
 body {
-    font-family: var(--font-base);
+    font-family: var(--fonte-base);
     background-color: var(--bg-primario);
     color: var(--texto-primario)
 }
@@ -70,9 +70,42 @@ nav ul {
     color:var(--texto-secundario);
 }
 
+#formacoes {
+    padding: var(--espaco-xl) var(--espaco-lg);
+    text-align: center;
+}
+
 .trilhas-linha {
     display: flex;
     gap: var(--espaco-lg);
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    margin-top: 280px;
+}
+
+.trilhas-linha::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--verde-acao), transparent);
+    background-size: 200% 100%;
+    z-index: -1;
+}
+
+.trilhas-linha::after {
+    content: '→';
+    position: absolute;
+    right: -32px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--verde-acao);
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .trilha-no {
@@ -89,33 +122,91 @@ nav ul {
 .trilha-card {
     opacity: 0;
     position: absolute;
-    bottom: 100%;  /*posiciona o card colado acima do nó, empurrando para fora da linha */
-    left: 50%;     /*centraliza o card horizontalmente: left:50% leva a borda esquerda até o
-                    centro do elemento pai, e translateX(-50%) puxa o card de volta em metade
-                    da PRÓPRIA largura dele, resultando em centralização perfeita */
-    transform: translateX(-50%);
-    background-color: var(--bg-superficie);
-    padding: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    background: radial-gradient(ellipse at 50% 30%, rgba(57, 211, 83, 0.18), var(--bg-superficie) 80%);
+    border: 1px solid rgba(57, 211, 83, 0.25);
+    box-shadow: 0 0 24px rgba(57, 211, 83, 0.15);
+    padding: var(--espaco-md);
     border-radius: var(--radius-card);
-    min-width: 300px;
+    min-width: 260px;
+    max-width: 280px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--espaco-xs);
 }
-/* a centralização acima quebra nas pontas: o card do primeiro/último nó
-   estoura a tela porque tenta se espalhar igualmente pros dois lados.
-   Aqui a gente troca a centralização por alinhamento à borda do nó nas
-   extremidades, mantendo o card sempre dentro da viewport. */
+
+.trilha:hover .trilha-card {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.trilha-card h3 {
+    font-family: var(--fonte-destaque);
+    font-size: 1.2rem;
+    color: var(--texto-primario);
+}
+
+.trilha-card .trilha-icone {
+    font-size: 2rem;
+}
+
+.trilha-card .trilha-icone {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: rgba(57, 211, 83, 0.1);
+    border: 1px solid rgba(57, 211, 83, 0.3);
+    color: var(--verde-acao);
+}
+
+.trilha-card .trilha-icone svg {
+    width: 24px;
+    height: 24px;
+}
+
+.trilha-card .trilha-duracao {
+    font-size: 0.75rem;
+    color: var(--verde-acao);
+    margin-top: var(--espaco-xs);
+}
+
+.trilha:hover .trilha-card {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.trilha:hover .trilha-no,
+.trilha:hover .trilha-nome {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
 .trilha:first-child .trilha-card {
     left: 0;
-    transform: translateX(0);
+    transform: translate(0, -50%) scale(0.3);
+}
+
+.trilha:first-child:hover .trilha-card {
+    transform: translate(0, -50%) scale(1);
 }
 
 .trilha:last-child .trilha-card {
     left: auto;
     right: 0;
-    transform: translateX(0);
+    transform: translate(0, -50%) scale(0.3);
 }
 
-.trilha:hover .trilha-card {
-    opacity: 1;
+.trilha:last-child:hover .trilha-card {
+    transform: translate(0, -50%) scale(1);
 }
 
 #prova-social {
@@ -149,10 +240,18 @@ nav ul {
 }
 
 .empresas-scroll {
+    margin-top: var(--espaco-xl);
+    margin-bottom: var(--espaco-lg);
+    overflow: hidden;
+    width: 100%;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+}
+
+.empresas-track {
     display: flex;
-    justify-content: center;
     gap: var(--espaco-lg);
-    margin-top: var(--espaco-lg);
+    width: max-content; /* a track cresce conforme o conteúdo, sem quebrar linha */
     color: var(--texto-secundario);
     font-size: 0.9rem;
 }
@@ -284,4 +383,16 @@ nav ul {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+}
+
+.trilhas-linha::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--verde-acao), transparent);
+    background-size: 200% 100%;
+    z-index: -1;
 }

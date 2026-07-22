@@ -1,0 +1,25 @@
+@keyframes linha-fluindo {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.trilhas-linha::before {
+    animation: linha-fluindo 8s linear infinite
+}
+
+@keyframes scroll-empresas {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-33.333%);
+    }
+}
+
+.empresas-track {
+    animation: scroll-empresas 20s linear infinite;
+}
