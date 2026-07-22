@@ -114,20 +114,245 @@ nav ul {
 
 #quem-somos {
     padding: var(--espaco-xl);
-    text-align: center;
 }
 
-#quem-somos h2 {
+.quem-somos-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr; /* texto ocupa um pouco mais de espaço que os números */
+    gap: var(--espaco-xl);
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto; /* centraliza o grid inteiro na página */
+    text-align: left; /* sai do "text-align: center" herdado do #formacoes/#prova-social */
+}
+
+.quem-somos-texto h2 {
     font-family: var(--fonte-destaque);
     font-size: 2rem;
+    text-align: left;
 }
 
-#quem-somos p {
-    max-width: 600px;
-    margin: 0 auto;
+.quem-somos-texto p {
     font-size: 1.1rem;
     font-family: var(--fonte-base);
-    color:var(--texto-secundario);
+    color: var(--texto-secundario);
+    max-width: none; /* remove o max-width: 600px antigo, que fazia sentido só no layout centralizado */
+}
+
+.quem-somos-numeros {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* grade 2x2 */
+    gap: var(--espaco-md);
+}
+
+.mini-numero {
+    background-color: var(--bg-superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-card);
+    padding: var(--espaco-md);
+    text-align: center;
+    transition: border-color 0.3s ease;
+}
+
+.mini-numero:hover {
+    border-color: rgba(57, 211, 83, 0.4);
+}
+
+.mini-numero span {
+    display: block;
+    font-family: var(--fonte-destaque);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--verde-acao);
+}
+
+.mini-numero p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+
+#diferenciais {
+    padding: var(--espaco-xl) var(--espaco-lg);
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.diferencial-linha {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-xl);
+    margin-bottom: var(--espaco-xl);
+}
+
+.diferencial-linha.reverso {
+    flex-direction: row-reverse; /* inverte a ordem visual: mockup à esquerda, texto à direita */
+}
+
+.diferencial-texto,
+.diferencial-mockup {
+    flex: 1; /* cada lado ocupa metade do espaço disponível */
+}
+
+.diferencial-texto {
+    text-align: left;
+}
+
+.diferencial-icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(57, 211, 83, 0.1);
+    border: 1px solid rgba(57, 211, 83, 0.3);
+    color: var(--verde-acao);
+    margin-bottom: var(--espaco-sm);
+}
+
+.diferencial-icone svg {
+    width: 24px;
+    height: 24px;
+}
+
+.diferencial-texto h3 {
+    font-family: var(--fonte-destaque);
+    font-size: 1.5rem;
+    margin-bottom: var(--espaco-xs);
+}
+
+.diferencial-texto p {
+    color: var(--texto-secundario);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 380px;
+}
+
+/* ===== MOCKUP (janela estilo navegador/app, tudo em CSS) ===== */
+.mockup-janela {
+    background-color: var(--bg-superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(57, 211, 83, 0.08);
+}
+
+.mockup-topo {
+    display: flex;
+    gap: 6px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--borda);
+}
+
+.mockup-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--borda);
+}
+
+.mockup-corpo {
+    padding: var(--espaco-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-sm);
+}
+
+.mockup-barra {
+    height: 10px;
+    border-radius: 6px;
+    background-color: var(--borda);
+}
+
+.mockup-barra.curta {
+    width: 40%;
+}
+
+.mockup-barra.verde {
+    background-color: rgba(57, 211, 83, 0.4);
+}
+
+/* variação: lista de trilhas com badge numerado */
+.mockup-trilha-item {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-sm);
+}
+
+.mockup-badge {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: rgba(57, 211, 83, 0.15);
+    color: var(--verde-acao);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mockup-barra-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+/* variação: linhas de código com recuo e "bolinha" de indicador */
+.mockup-codigo .linha-codigo {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-xs);
+}
+
+.mockup-codigo .linha-codigo.indent {
+    padding-left: var(--espaco-md);
+}
+
+.ponto-codigo {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--verde-acao);
+    flex-shrink: 0;
+}
+
+/* variação: avatares em linha, pra comunidade */
+.mockup-avatares {
+    display: flex;
+    gap: 8px;
+    margin-bottom: var(--espaco-xs);
+}
+
+.mockup-avatar-mini {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(57, 211, 83, 0.3);
+    border: 1px solid rgba(57, 211, 83, 0.5);
+}
+
+/* variação: balões de chat, pra mentoria */
+.mockup-balao {
+    max-width: 70%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background-color: var(--bg-primario);
+}
+
+.mockup-balao.esquerda {
+    align-self: flex-start;
+    border-bottom-left-radius: 2px;
+}
+
+.mockup-balao.direita {
+    align-self: flex-end;
+    border-bottom-right-radius: 2px;
+    background-color: rgba(57, 211, 83, 0.1);
 }
 
 #formacoes {
@@ -518,9 +743,17 @@ section:not(#hero)::before {
         padding: 0 var(--espaco-md);
     }
 
-    #quem-somos h2 {
-        font-size: 1.5rem;
+    @media (max-width: 768px) {
+    .quem-somos-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
     }
+
+    .quem-somos-texto h2,
+    .quem-somos-texto p {
+        text-align: center;
+    }
+}
 
 
 
