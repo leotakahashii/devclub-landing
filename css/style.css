@@ -1,7 +1,14 @@
 body {
     font-family: var(--fonte-base);
     background-color: var(--bg-primario);
-    color: var(--texto-primario)
+    color: var(--texto-primario);
+
+    background-image: linear-gradient(
+        180deg,
+        #1e1e1e 0%,          /* cinza neutro, SEM mistura de verde */
+        var(--bg-primario) 100%
+    );
+    background-repeat: no-repeat;
 }
 
 h2 {
@@ -20,6 +27,23 @@ header {
     width: 100%; 
     z-index: 10;
     background-color: rgba(18, 18, 18, 0.9);
+}
+
+.hero-logo-wrapper {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.hero-logo {
+    width: 320px;
+    height: 320px;
+    border-radius: 48px;
+    filter: drop-shadow(0 0 24px rgba(57, 211, 83, 0.25));
+    transition: filter 0.2s ease;
+    opacity: 0.85;
 }
 
 .logo {
@@ -46,7 +70,8 @@ nav ul {
 #hero {
     height: 100vh;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-bottom: 120px;
     align-items: center;
     flex-direction: column;
     position: relative;
@@ -294,24 +319,55 @@ nav ul {
     gap: var(--espaco-lg);
 }
 
-.tutor-identidade {
+.tutor-lista {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-lg);
+    flex-wrap: wrap; /* evita que os cards espremam demais em telas menores */
+}
+
+.tutor-card {
+    background-color: var(--bg-superficie);
+    border: 1px solid var(--borda);
+    border-radius: var(--radius-card);
+    padding: var(--espaco-lg);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: var(--espaco-xs);
+    max-width: 240px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.tutor-avatar {
-    width: 64px;
-    height: 64px;
+.tutor-card:hover {
+    transform: translateY(-6px); /* levanta sutilmente no hover, dá sensação de interatividade */
+    border-color: rgba(57, 211, 83, 0.4);
+}
+
+.tutor-avatar-foto {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    background-color: var(--verde-acao);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: var(--fonte-destaque);
-    font-weight: 700;
-    color: var(--bg-primario);
+    background-color: var(--bg-primario); /* cor de fundo enquanto a imagem carrega */
+    margin-bottom: var(--espaco-xs);
+}
+
+.tutor-card span {
+    font-family: var(--fonte-base);
+    font-weight: 600;
+    color: var(--texto-primario);
+}
+
+.tutor-cargo {
+    font-size: 0.85rem;
+    color: var(--verde-acao); /* destaca a especialidade em verde, diferencia da bio */
+    font-weight: 500;
+}
+
+.tutor-bio {
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+    line-height: 1.4;
 }
 
 .tutor-identidade span {

@@ -19,6 +19,7 @@
     <script src="./js/main.js" defer></script>
     <script src="./js/particles.js" defer></script>
     <script src="./js/carrossel.js" defer></script>
+    <script src="./js/logoGlow.js" defer></script>
 </head>
 <body>
     
@@ -38,6 +39,16 @@
     <!--====HERO====-->
     <section id="hero">
         <canvas id="particulas-hero"></canvas>
+        <div class="hero-logo-wrapper">
+            <svg class="hero-logo" viewBox="0 0 100 100" fill="none">
+                <rect x="5" y="5" width="90" height="90" rx="24" stroke="var(--verde-acao)" stroke-width="4" />
+                <path d="M35 35 L20 50 L35 65" stroke="var(--verde-acao)" stroke-width="5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <path d="M65 35 L80 50 L65 65" stroke="var(--verde-acao)" stroke-width="5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                <line x1="58" y1="28" x2="42" y2="72" stroke="var(--verde-acao)" stroke-width="5" stroke-linecap="round" />
+            </svg>
+        </div>
         <h1>Sua nova fase começa aqui.</h1>
         <p>Do primeiro código à primeira vaga, sem atalhos, sem enrolação.</p>
         <a href="#cta-final">Começar minha <span>jornada</span></a>
@@ -195,38 +206,43 @@
         </div>
     </section>
     
-    
-    <!--====TUTORES====-->
-    <section id="tutores" class="reveal">
-        <h2>Os especialistas do assunto</h2>
-        <div class="tutor-lista">
-            <div class="tutor-identidade">
-                <div class="tutor-avatar">AF</div>
-                <span>Ana Ferreira</span>
-                <p>Front End & UI - Especialista</p>
-            </div>
-        
-            <div class="tutor-identidade">
-                <div class="tutor-avatar">CL</div>
-                <span>Carlos Lima</span>
-                <p>Back End & Node - Instrutor Sênior</p>
-            </div>
-
-            <div class="tutor-identidade">
-                <div class="tutor-avatar">BS</div>
-                <span>Beatriz Souza</span>
-                <p>React & Carreira - Mentora</p>
-            </div>
-        
-            <div class="tutor-identidade">
-                <div class="tutor-avatar">RC</div>
-                <span>Rafael Costa</span>
-                <p>IA para Devs - Especialista</p>
-            </div>
+        <!--====TUTORES====-->
+<section id="tutores" class="reveal">
+    <h2>Os especialistas do assunto</h2>
+    <div class="tutor-lista">
+        <div class="tutor-card">
+            <img class="tutor-avatar-foto" src="https://api.dicebear.com/9.x/glass/svg?seed=Ana Ferreira"
+                alt="Ana Ferreira">
+            <span>Ana Ferreira</span>
+            <p class="tutor-cargo">Front End & UI - Especialista</p>
+            <p class="tutor-bio">6 anos ensinando front-end, já formou mais de 400 devs.</p>
         </div>
-    
-    </section>
-    
+
+        <div class="tutor-card">
+            <img class="tutor-avatar-foto" src="https://api.dicebear.com/9.x/glass/svg?seed=Carlos Lima"
+                alt="Carlos Lima">
+            <span>Carlos Lima</span>
+            <p class="tutor-cargo">Back End & Node - Instrutor Sênior</p>
+            <p class="tutor-bio">8 anos de back-end em produção, especialista em arquitetura escalável.</p>
+        </div>
+
+        <div class="tutor-card">
+            <img class="tutor-avatar-foto" src="https://api.dicebear.com/9.x/glass/svg?seed=Beatriz Souza"
+                alt="Beatriz Souza">
+            <span>Beatriz Souza</span>
+            <p class="tutor-cargo">React & Carreira - Mentora</p>
+            <p class="tutor-bio">Ajudou mais de 200 alunos a conseguirem sua primeira vaga.</p>
+        </div>
+
+        <div class="tutor-card">
+            <img class="tutor-avatar-foto" src="https://api.dicebear.com/9.x/glass/svg?seed=Rafael Costa"
+                alt="Rafael Costa">
+            <span>Rafael Costa</span>
+            <p class="tutor-cargo">IA para Devs - Especialista</p>
+            <p class="tutor-bio">Pioneiro em IA aplicada ao desenvolvimento, referência na comunidade.</p>
+        </div>
+    </div>
+</section>
     
     <!--====DEPOIMENTOS====-->
     <section id="depoimentos" class="reveal">

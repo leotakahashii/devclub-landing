@@ -77,8 +77,34 @@ function iniciar() {
 }
 iniciar();
 
+function conectarParticulas() {
+    const distanciaMaxima = 120; // limite em pixels — acima disso, não conecta
+
+    for (let i = 0; i < particulas.length; i++) {
+        for (let j = i + 1; j < particulas.length; j++) {
+            const dx = particulas[i].x - particulas[j].x;
+            const dy = particulas[i].y - particulas[j].y;
+            const distancia = Math.sqrt(dx * dx + dy * dy);
+
+            if (distancia < distanciaMaxima) {
+                // quanto mais perto as duas partículas estão, mais opaca (visível) fica a linha
+                const opacidade = 1 - (distancia / distanciaMaxima);
+
+                ctx.beginPath();
+                ctx.moveTo(particulas[i].x, particulas[i].y);
+                ctx.lineTo(particulas[j].x, particulas[j].y);
+                ctx.strokeStyle = `rgba(57, 211, 83, ${opacidade * 0.3})`; // verde da marca, bem sutil (0.3 no máximo)
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+
 function animar() {
     ctx.clearRect(0, 0, largura, altura);
+    conectarParticulas();
     particulas.forEach(p => p.atualizar());
     requestAnimationFrame(animar);
 }
