@@ -93,7 +93,8 @@ nav ul {
     position: relative;
     z-index: 1;
     isolation: isolate;
-    margin-top: 280px;
+    margin-top: var(--espaco-xl);
+    transition: padding-bottom 0.4s ease;
 }
 
 .trilhas-linha::before {
@@ -140,21 +141,22 @@ nav ul {
     background: radial-gradient(ellipse at 50% 30%, rgba(57, 211, 83, 0.18), var(--bg-superficie) 80%);
     border: 1px solid rgba(57, 211, 83, 0.25);
     box-shadow: 0 0 24px rgba(57, 211, 83, 0.15);
-    padding: var(--espaco-md);
+    padding: var(--espaco-lg);
     border-radius: var(--radius-card);
-    min-width: 260px;
-    max-width: 280px;
+    min-width: 300px;
+    max-width: 340px;
     z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: var(--espaco-xs);
+    gap: var(--espaco-sm);
 }
 
 .trilha:hover .trilha-card {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
+    box-shadow: 0 0 32px rgba(57, 211, 83, 0.25);
 }
 
 .trilha-card h3 {
@@ -188,11 +190,6 @@ nav ul {
     font-size: 0.75rem;
     color: var(--verde-acao);
     margin-top: var(--espaco-xs);
-}
-
-.trilha:hover .trilha-card {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
 }
 
 .trilha:hover .trilha-no,
@@ -408,6 +405,20 @@ nav ul {
     z-index: -1;
 }
 
+section {
+    position: relative;
+}
+
+section:not(#hero)::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--borda), transparent);
+}
+
 /* ===== RESPONSIVIDADE MOBILE ===== */
 @media (max-width: 768px) {
 
@@ -444,7 +455,8 @@ nav ul {
 
     .trilhas-linha::before,
     .trilhas-linha::after {
-        display: none; /* a linha horizontal não faz sentido em coluna; removemos em vez de tentar adaptar */
+        display: none;
+        /* a linha horizontal não faz sentido em coluna; removemos em vez de tentar adaptar */
     }
 
     .trilha-card {
@@ -458,7 +470,8 @@ nav ul {
 
     .trilha:hover .trilha-no,
     .trilha:hover .trilha-nome {
-        opacity: 1; /* cancela o "sumiço" no hover, já que em mobile o card já fica sempre visível */
+        opacity: 1;
+        /* cancela o "sumiço" no hover, já que em mobile o card já fica sempre visível */
     }
 
     .numeros {
@@ -489,16 +502,27 @@ nav ul {
     }
 
     .trilha:first-child .trilha-card,
-.trilha:last-child .trilha-card {
-    position: static;
-    opacity: 1;
-    transform: none;
-    left: auto;
-    right: auto;
+    .trilha:last-child .trilha-card {
+        position: static;
+        opacity: 1;
+        transform: none;
+        left: auto;
+        right: auto;
+    }
+
+    .trilha:first-child:hover .trilha-card,
+    .trilha:last-child:hover .trilha-card {
+        transform: none;
+    }
+}
+    
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.trilha:first-child:hover .trilha-card,
-.trilha:last-child:hover .trilha-card {
-    transform: none;
-}
+.reveal.ativo {
+    opacity: 1;
+    transform: translateY(0);
 }
