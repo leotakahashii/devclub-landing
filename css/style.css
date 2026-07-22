@@ -12,12 +12,14 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--espaco-sm) var(--espaco-lg); /* vertical menor (faixa fina), horizontal maior (respiro das bordas) */
-    background-color: rgba(18, 18, 18, 0.8); /* mesmo tom do --bg-primario, mas com transparência pra ainda deixar ver um pouco as partículas */
-    backdrop-filter: blur(8px); /* desfoca o que está atrás do header, reforça a separação visual sem precisar de fundo 100% sólido */
-    border-bottom: 1px solid var(--borda); /* linha sutil delimitando onde o header termina */
-    position: relative; /* garante que o header fique acima das partículas do canvas */
+    padding: var(--espaco-sm) var(--espaco-lg); 
+    border-bottom: 1px solid var(--borda);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
     z-index: 10;
+    background-color: rgba(18, 18, 18, 0.9);
 }
 
 .logo {
@@ -109,86 +111,60 @@ nav ul {
     text-align: center;
 }
 
-.trilhas-linha {
+.trilhas-carrossel {
     display: flex;
-    gap: var(--espaco-lg);
-    justify-content: space-between;
-    position: relative;
-    z-index: 1;
-    isolation: isolate;
-    margin-top: var(--espaco-xl);
+    gap: var(--espaco-md);
+    overflow-x: auto;         /* permite rolar horizontalmente */
+    scroll-snap-type: x mandatory; /* o navegador "encaixa" no card mais próximo ao soltar o scroll */
+    padding: var(--espaco-lg) 0; /* respiro vertical pro glow/sombra dos cards não cortar */
+    cursor: grab;              /* indica visualmente que dá pra arrastar */
+    scrollbar-width: none;     /* esconde a barra de scroll no Firefox */
 }
 
-.trilhas-linha::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--verde-acao), transparent);
-    background-size: 200% 100%;
-    z-index: -1;
+.trilhas-carrossel::-webkit-scrollbar {
+    display: none; /* esconde a barra de scroll no Chrome/Edge/Safari */
 }
 
-.trilhas-linha::after {
-    content: '→';
-    position: absolute;
-    right: -32px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--verde-acao);
-    font-size: 1.5rem;
-    font-weight: 700;
+.trilhas-carrossel.arrastando {
+    cursor: grabbing; /* feedback visual enquanto o usuário está arrastando (classe controlada via JS) */
+    scroll-snap-type: none; /* desliga o "encaixe" durante o arraste, pra não travar o movimento */
 }
 
-.trilha-no {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--verde-acao);
-}
-
-.trilha {
-    position: relative;
+.trilha-slide {
+    flex: 0 0 auto;             /* não cresce, não encolhe, mantém o tamanho definido abaixo */
+    width: calc((100% - 2 * var(--espaco-md)) / 3); /* 3 cards visíveis, descontando os 2 gaps entre eles */
+    scroll-snap-align: start;   /* cada slide "gruda" no início do container ao rolar */
 }
 
 .trilha-card {
-    opacity: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.3);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* removendo o que só fazia sentido no modelo de hover: opacity, position absolute, transform de scale */
+    position: static;
+    opacity: 1;
+    transform: none;
     background: radial-gradient(ellipse at 50% 30%, rgba(57, 211, 83, 0.18), var(--bg-superficie) 80%);
     border: 1px solid rgba(57, 211, 83, 0.25);
     box-shadow: 0 0 24px rgba(57, 211, 83, 0.15);
     padding: var(--espaco-lg);
     border-radius: var(--radius-card);
-    min-width: 300px;
-    max-width: 340px;
-    z-index: 100;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     gap: var(--espaco-sm);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-.trilha:hover .trilha-card {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    box-shadow: 0 0 32px rgba(57, 211, 83, 0.25);
+.trilha-card:hover {
+    box-shadow: 0 0 32px rgba(57, 211, 83, 0.25); /* mantém um feedback visual sutil no hover, mesmo sem esconder/mostrar nada */
+    border-color: rgba(57, 211, 83, 0.4);
 }
 
 .trilha-card h3 {
     font-family: var(--fonte-destaque);
     font-size: 1.2rem;
     color: var(--texto-primario);
-}
-
-.trilha-card .trilha-icone {
-    font-size: 2rem;
 }
 
 .trilha-card .trilha-icone {
@@ -214,29 +190,27 @@ nav ul {
     margin-top: var(--espaco-xs);
 }
 
-.trilha:hover .trilha-no,
-.trilha:hover .trilha-nome {
-    opacity: 0;
-    transition: opacity 0.2s ease;
+.trilhas-pontinhos {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-sm);
+    margin-top: var(--espaco-lg);
 }
 
-.trilha:first-child .trilha-card {
-    left: 0;
-    transform: translate(0, -50%) scale(0.3);
+.pontinho {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--borda); /* estado inativo: cinza sutil */
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.trilha:first-child:hover .trilha-card {
-    transform: translate(0, -50%) scale(1);
-}
-
-.trilha:last-child .trilha-card {
-    left: auto;
-    right: 0;
-    transform: translate(0, -50%) scale(0.3);
-}
-
-.trilha:last-child:hover .trilha-card {
-    transform: translate(0, -50%) scale(1);
+.pontinho.ativo {
+    background-color: var(--verde-acao); /* estado ativo: verde, indicando o slide atual */
+    transform: scale(1.3);
 }
 
 #prova-social {
@@ -438,18 +412,6 @@ nav ul {
     border: 0;
 }
 
-.trilhas-linha::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--verde-acao), transparent);
-    background-size: 200% 100%;
-    z-index: -1;
-}
-
 section {
     position: relative;
 }
@@ -465,6 +427,19 @@ section:not(#hero)::before {
 }
 
 /* ===== RESPONSIVIDADE MOBILE ===== */
+
+@media (max-width: 1024px) {
+    .trilha-slide {
+        width: calc((100% - var(--espaco-md)) / 2); /* 2 cards visíveis */
+    }
+}
+
+@media (max-width: 768px) {
+    .trilha-slide {
+        width: 85%; /* quase 1 card por vez, com uma "espiadinha" do próximo pra indicar que é scrollável */
+    }
+}
+
 @media (max-width: 768px) {
 
     header {
@@ -491,43 +466,7 @@ section:not(#hero)::before {
         font-size: 1.5rem;
     }
 
-    .trilhas-linha {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--espaco-xl);
-        margin-top: var(--espaco-lg);
-    }
 
-    .trilhas-linha::before,
-    .trilhas-linha::after {
-        display: none;
-        /* a linha horizontal não faz sentido em coluna; removemos em vez de tentar adaptar */
-    }
-
-    .trilha-card {
-        /* em mobile, abandonamos o hover (não existe em touch) e centralizamos simples */
-        position: static;
-        opacity: 1;
-        transform: none;
-        margin-top: var(--espaco-xs);
-        max-width: 100%;
-    }
-
-    .trilha:hover .trilha-no,
-    .trilha:hover .trilha-nome {
-        opacity: 1;
-        /* cancela o "sumiço" no hover, já que em mobile o card já fica sempre visível */
-    }
-
-    .numeros {
-        flex-direction: column;
-        gap: var(--espaco-md);
-    }
-
-    .tutor-lista {
-        flex-direction: column;
-        gap: var(--espaco-md);
-    }
 
     .depoimentos-lista {
         flex-direction: column;
@@ -539,35 +478,15 @@ section:not(#hero)::before {
         align-items: stretch;
         padding: 0 var(--espaco-md);
     }
-
-    .trilha:hover .trilha-card {
-        position: static;
-        opacity: 1;
-        transform: none;
-    }
-
-    .trilha:first-child .trilha-card,
-    .trilha:last-child .trilha-card {
-        position: static;
-        opacity: 1;
-        transform: none;
-        left: auto;
-        right: auto;
-    }
-
-    .trilha:first-child:hover .trilha-card,
-    .trilha:last-child:hover .trilha-card {
-        transform: none;
-    }
 }
-    
+
 .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
 
-.reveal.ativo {
-    opacity: 1;
-    transform: translateY(0);
-}
+    .reveal.ativo {
+        opacity: 1;
+        transform: translateY(0);
+    }
