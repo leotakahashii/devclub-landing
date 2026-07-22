@@ -7,7 +7,7 @@ const observer = new IntersectionObserver((entradas) => {
                 entrada.target.classList.add('ativo');
             }, index * 100);
         } else {
-            entrada.target.classList.remove('ativo'); // some novamente ao sair da tela, pronta pra reanimar
+            entrada.target.classList.remove('ativo');
         }
     });
 }, {
