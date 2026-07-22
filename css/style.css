@@ -4,6 +4,10 @@ body {
     color: var(--texto-primario)
 }
 
+h2 {
+    margin-bottom: var(--espaco-lg);
+}
+
 header {
     display:flex;
     justify-content:space-between;
@@ -193,4 +197,38 @@ nav ul {
 .tutor-identidade p {
     font-size: 0.85rem;
     color: var(--texto-secundario);
+}
+
+#depoimentos {
+    padding: var(--espaco-lg);
+    text-align: center;
+}
+
+.depoimentos-lista {
+    display: flex;
+    justify-content: center;
+    gap: var(--espaco-lg);
+}
+
+.depoimento {
+    background-color: var(--bg-superficie);
+    padding: var(--espaco-md);
+    border-radius: var(--radius-card);
+    max-width: 320px;
+    text-align: left; /* citação costuma ler melhor alinhada à esquerda, mesmo com a seção centralizada */
+}
+
+.depoimento blockquote {
+    font-style: italic;
+    color: var(--texto-primario);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: var(--espaco-sm);
+}
+
+.depoimento span {
+    display: block; /* span é inline por padrão; block joga a autoria pra própria linha */
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    font-weight: 600;
 }
