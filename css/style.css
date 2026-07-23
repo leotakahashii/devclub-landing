@@ -882,6 +882,10 @@ section:not(#hero)::before {
         padding: 0 var(--espaco-md);
     }
 
+    #hero h1, #hero p {
+    text-align: center;
+}
+
     /* logo grande (320px) precisa encolher bastante em telas pequenas,
        senão ocupa a tela quase inteira e empurra o texto pra fora da viewport */
     .hero-logo {
