@@ -858,9 +858,11 @@ section:not(#hero)::before {
     }
 
     nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--espaco-xs);
+    font-size: 0.85rem;
+}
 
     /* ---------- HERO ---------- */
     #hero h1 {
