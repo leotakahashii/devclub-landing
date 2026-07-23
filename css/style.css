@@ -714,10 +714,17 @@ nav ul {
 }
 
 .faq-item {
-    background-color: var(--bg-superficie);
-    border: 1px solid var(--borda);
+    background: radial-gradient(ellipse at 50% 0%, rgba(57, 211, 83, 0.12), var(--bg-superficie) 70%);
+    border: 1px solid rgba(57, 211, 83, 0.2);
+    box-shadow: 0 0 20px rgba(57, 211, 83, 0.1);
     border-radius: var(--radius-card);
-    overflow: hidden; /* essencial: esconde o conteúdo da resposta durante a animação de altura */
+    overflow: hidden; /* mantém — essencial pra animação de altura da resposta */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 0 28px rgba(57, 211, 83, 0.2);
+    border-color: rgba(57, 211, 83, 0.35);
 }
 
 .faq-pergunta {
