@@ -850,6 +850,11 @@ section:not(#hero)::before {
 
 @media (max-width: 768px) {
 
+    .numeros {
+    flex-wrap: wrap;
+    gap: var(--espaco-md); /* reduz um pouco o espaçamento também, ajuda a caber melhor */
+}
+    
     /* ---------- HEADER ---------- */
     header {
         flex-direction: column;
