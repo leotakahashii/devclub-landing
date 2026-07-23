@@ -851,8 +851,10 @@ section:not(#hero)::before {
 @media (max-width: 768px) {
 
     .numeros {
-    flex-wrap: wrap;
-    gap: var(--espaco-md); /* reduz um pouco o espaçamento também, ajuda a caber melhor */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--espaco-sm);
+    justify-items: center;
 }
     
     /* ---------- HEADER ---------- */
@@ -863,10 +865,11 @@ section:not(#hero)::before {
     }
 
     nav ul {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: var(--espaco-xs);
-    font-size: 0.85rem;
+    width: 100%; /* garante que o ul realmente respeite a largura do pai, em vez de tentar caber tudo numa linha */
 }
 
     /* ---------- HERO ---------- */
