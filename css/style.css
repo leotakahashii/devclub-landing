@@ -578,7 +578,6 @@ nav ul {
     justify-content: center;
     gap: var(--espaco-lg);
     flex-wrap: wrap; /* evita que os cards espremam demais em telas menores */
-    perspective: 1000px;
 }
 
 .tutor-card {
@@ -638,11 +637,30 @@ nav ul {
 }
 
 .depoimento {
-    background-color: var(--bg-superficie);
+    background: radial-gradient(ellipse at 50% 0%, rgba(57, 211, 83, 0.12), var(--bg-superficie) 70%);
+    border: 1px solid rgba(57, 211, 83, 0.2);
+    box-shadow: 0 0 20px rgba(57, 211, 83, 0.1);
     padding: var(--espaco-md);
     border-radius: var(--radius-card);
     max-width: 320px;
-    text-align: left; /* citação costuma ler melhor alinhada à esquerda, mesmo com a seção centralizada */
+    text-align: left;
+    position: relative; /* referência pra posicionar as aspas */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.depoimento:hover {
+    box-shadow: 0 0 28px rgba(57, 211, 83, 0.2);
+    border-color: rgba(57, 211, 83, 0.35);
+    transform: translateY(-4px);
+}
+
+.depoimento-aspas {
+    display: block;
+    font-family: var(--fonte-destaque);
+    font-size: 3.5rem;
+    line-height: 1;
+    color: rgba(57, 211, 83, 0.35);
+    margin-bottom: -10px; /* aproxima a citação, compensando o espaço vazio do caractere de aspas */
 }
 
 .depoimento blockquote {
@@ -653,8 +671,29 @@ nav ul {
     margin-bottom: var(--espaco-sm);
 }
 
-.depoimento span {
-    display: block; /* span é inline por padrão; block joga a autoria pra própria linha */
+.depoimento-autor {
+    display: flex;
+    align-items: center;
+    gap: var(--espaco-xs);
+}
+
+.depoimento-avatar {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--verde-acao), #2a9d47); /* gradiente sutil, mesma família de cor da marca */
+    color: var(--bg-primario);
+    font-family: var(--fonte-destaque);
+    font-weight: 700;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.depoimento-autor span:last-child {
+    display: block;
     font-size: 0.85rem;
     color: var(--texto-secundario);
     font-weight: 600;
