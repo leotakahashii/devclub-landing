@@ -840,6 +840,10 @@ section:not(#hero)::before {
     background: linear-gradient(90deg, transparent, var(--borda), transparent);
 }
 
+.menu-toggle {
+    display: none;
+}
+
 
 /* Carrossel de trilhas: 2 cards visíveis em telas médias (tablets) */
 @media (max-width: 1024px) {
@@ -851,40 +855,80 @@ section:not(#hero)::before {
 @media (max-width: 768px) {
 
     .numeros {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--espaco-sm);
-    justify-items: center;
-}
-    
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--espaco-sm);
+        justify-items: center;
+    }
+
     /* ---------- HEADER ---------- */
     header {
-        flex-direction: column;
-        gap: var(--espaco-sm);
+        flex-wrap: wrap;
         padding: var(--espaco-sm);
     }
 
+    .menu-toggle {
+        display: flex;
+        /* só aparece em mobile — em desktop fica escondido (ver regra fora do media query) */
+        flex-direction: column;
+        justify-content: space-between;
+        width: 24px;
+        height: 18px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: var(--texto-primario);
+    }
+
+    nav {
+        width: 100%;
+        max-height: 0;
+        /* escondido por padrão */
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        order: 3;
+        /* joga a nav pra última posição, abaixo do header em mobile */
+    }
+
+    nav.aberto {
+        max-height: 300px;
+        /* alto o suficiente pra caber os 5 links empilhados */
+    }
+
     nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--espaco-xs);
-    width: 100%; /* garante que o ul realmente respeite a largura do pai, em vez de tentar caber tudo numa linha */
-}
+        flex-direction: column;
+        /* empilha os links verticalmente dentro do menu aberto */
+        align-items: center;
+        gap: var(--espaco-sm);
+        padding: var(--espaco-md) 0;
+    }
+
+    .btn-header {
+        order: 2;
+        /* garante que o botão CTA continue visível na primeira linha, ao lado do hambúrguer */
+    }
 
     /* ---------- HERO ---------- */
     #hero h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 
     #hero p {
-        font-size: 1rem;
+        font-size: 0.9rem;
         padding: 0 var(--espaco-md);
     }
 
-    #hero h1, #hero p {
-    text-align: center;
-}
+    #hero h1,
+    #hero p {
+        text-align: center;
+    }
 
     /* logo grande (320px) precisa encolher bastante em telas pequenas,
        senão ocupa a tela quase inteira e empurra o texto pra fora da viewport */
@@ -899,7 +943,8 @@ section:not(#hero)::before {
 
     /* ---------- QUEM SOMOS ---------- */
     .quem-somos-grid {
-        grid-template-columns: 1fr; /* empilha texto e números, era 2 colunas */
+        grid-template-columns: 1fr;
+        /* empilha texto e números, era 2 colunas */
         text-align: center;
     }
 
@@ -909,13 +954,15 @@ section:not(#hero)::before {
     }
 
     .quem-somos-numeros {
-        grid-template-columns: 1fr 1fr; /* mantém 2x2, já cabe bem mesmo em telas pequenas */
+        grid-template-columns: 1fr 1fr;
+        /* mantém 2x2, já cabe bem mesmo em telas pequenas */
     }
 
     /* ---------- DIFERENCIAIS ---------- */
     .diferencial-linha,
     .diferencial-linha.reverso {
-        flex-direction: column; /* empilha texto e mockup, cancela o zigue-zague lateral */
+        flex-direction: column;
+        /* empilha texto e mockup, cancela o zigue-zague lateral */
         text-align: center;
         gap: var(--espaco-lg);
     }
@@ -930,16 +977,19 @@ section:not(#hero)::before {
 
     .diferencial-icone {
         margin-left: auto;
-        margin-right: auto; /* centraliza o ícone, já que o texto também está centralizado agora */
+        margin-right: auto;
+        /* centraliza o ícone, já que o texto também está centralizado agora */
     }
 
     /* ---------- FORMAÇÕES (carrossel) ---------- */
     #formacoes {
-        padding-bottom: 140px; /* reduz o espaço reservado embaixo, os cards ficam mais compactos em mobile */
+        padding-bottom: 140px;
+        /* reduz o espaço reservado embaixo, os cards ficam mais compactos em mobile */
     }
 
     .trilha-slide {
-        width: 85%; /* quase 1 card por vez, com uma "espiadinha" do próximo pra indicar que é scrollável */
+        width: 85%;
+        /* quase 1 card por vez, com uma "espiadinha" do próximo pra indicar que é scrollável */
     }
 
     /* ---------- TUTORES ---------- */
