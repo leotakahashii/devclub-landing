@@ -3,12 +3,15 @@ body {
     background-color: var(--bg-primario);
     color: var(--texto-primario);
 
-    background-image: linear-gradient(
-        180deg,
-        #1e1e1e 0%,          /* cinza neutro, SEM mistura de verde */
-        var(--bg-primario) 100%
-    );
-    background-repeat: no-repeat;
+    background-image:
+        radial-gradient(circle, rgba(57, 211, 83, 0.06) 1px, transparent 1px),
+        linear-gradient(
+            180deg,
+            #1e1e1e 0%,
+            var(--bg-primario) 100%
+        );
+    background-size: 24px 24px, auto; /* o padrão de pontos se repete a cada 24px; o gradiente não repete */
+    background-repeat: repeat, no-repeat; /* pontos repetem infinitamente; gradiente não */
 }
 
 h2 {
@@ -575,6 +578,7 @@ nav ul {
     justify-content: center;
     gap: var(--espaco-lg);
     flex-wrap: wrap; /* evita que os cards espremam demais em telas menores */
+    perspective: 1000px;
 }
 
 .tutor-card {
@@ -587,7 +591,8 @@ nav ul {
     align-items: center;
     gap: var(--espaco-xs);
     max-width: 240px;
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    transition: transform 0.15s ease-out, border-color 0.3s ease;
+    transform-style: preserve-3d;
 }
 
 .tutor-card:hover {
